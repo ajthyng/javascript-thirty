@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import LedZeppelin from '../../img/led_zeppelin.png'
+import LedZeppelin from '../../img/led_zeppelin.jpg'
 import Drums from './Drums'
 
 const Container = styled.div`
