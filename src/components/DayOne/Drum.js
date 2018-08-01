@@ -46,8 +46,8 @@ class Drum extends Component {
       active: false
     }
     this.audio = new Audio()
-    this.audio.addEventListener('canplaythrough', null, false)
-    this.audio.src = `sounds/${this.props.label.toLowerCase()}.wav`
+    this.audio.addEventListener('canplaythrough', this.onLoad, false)
+    this.audio.src = `sounds/${this.props.label.toLowerCase()}.ogg`
   }
 
   handleKeydown = event => {
@@ -55,10 +55,15 @@ class Drum extends Component {
     const { active } = this.state
     if (!active && event.key.toUpperCase() === activeKey.toUpperCase()) {
       event.preventDefault()
-      if (this.audio) this.audio.currentTime = 0
-      this.audio && this.audio.play()
+      this.audio.currentTime = 0
+      this.audio.play()
       this.setState({ active: true })
     }
+  }
+
+  onLoad = () => {
+    const { label } = this.props
+    console.log(`Loaded ${label.toLowerCase()}.ogg`)
   }
 
   onClick = () => {
