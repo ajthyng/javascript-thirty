@@ -21,7 +21,7 @@ const sounds = [
 const Drums = props => (
   <Container>
     {sounds.map(({ key, label }, index) => (
-      <Drum key={index.toString(10)} activeKey={key} label={label} />
+      <Drum key={key} activeKey={key} label={label} />
     ))}
   </Container>
 )

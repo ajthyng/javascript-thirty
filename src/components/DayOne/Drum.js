@@ -4,12 +4,10 @@ import styled from 'styled-components'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   width: 75px;
   height: 75px;
   border: 2px solid ${props => (props.active ? 'orange' : '#000000')};
-  border-radius: 10px;
   background-color: rgba(100, 100, 100, 0.6);
   box-shadow: 0 0 ${props => (props.active ? '10px' : '0')} orange;
   margin: 5px;
@@ -18,14 +16,14 @@ const Container = styled.div`
   cursor: pointer;
 `
 
-const KeyLabel = styled.span`
+const Key = styled.span`
   color: white;
   font-size: 18px;
   text-transform: uppercase;
   flex: 1;
 `
 
-const Sound = styled.div`
+const Sound = styled.span`
   color: yellow;
   font-size: 10px;
   text-transform: uppercase;
@@ -41,8 +39,6 @@ const Labels = styled.div`
   user-select: none;
 `
 
-const Audio = styled.audio``
-
 class Drum extends Component {
   state = {
     active: false
@@ -51,12 +47,20 @@ class Drum extends Component {
   handleKeydown = event => {
     const { activeKey } = this.props
     const { active } = this.state
-    if (event.key.toUpperCase() === activeKey.toUpperCase()) {
+    if (!active && event.key.toUpperCase() === activeKey.toUpperCase()) {
       event.preventDefault()
       if (this.audio) this.audio.currentTime = 0
       this.audio && this.audio.play()
       this.setState({ active: true })
     }
+  }
+
+  onClick = () => {
+    const { activeKey } = this.props
+    this.handleKeydown({
+      key: activeKey,
+      preventDefault: () => null
+    })
   }
 
   componentDidMount () {
@@ -70,29 +74,23 @@ class Drum extends Component {
   componentDidUpdate () {
     const { active } = this.state
     if (active) {
-      setTimeout(() => this.setState({ active: false }), 70)
+      setTimeout(() => this.setState({ active: false }), 100)
     }
   }
 
   render () {
     const { activeKey, label } = this.props
     const { active } = this.state
+
     return (
-      <Container
-        active={active}
-        onClick={() =>
-          this.handleKeydown({
-            key: activeKey,
-            preventDefault: () => null
-          })}
-      >
+      <Container active={active} onClick={this.onClick}>
         <Labels>
-          <KeyLabel>{activeKey}</KeyLabel>
+          <Key>{activeKey}</Key>
           <Sound>{label}</Sound>
-          <Audio
+          <audio
+            ref={c => (this.audio = c)}
             type='audio/wav'
             src={`sounds/${label.toLowerCase()}.wav`}
-            innerRef={c => (this.audio = c)}
           />
         </Labels>
       </Container>
