@@ -40,8 +40,14 @@ const Labels = styled.div`
 `
 
 class Drum extends Component {
-  state = {
-    active: false
+  constructor (props) {
+    super(props)
+    this.state = {
+      active: false
+    }
+    this.audio = new Audio()
+    this.audio.addEventListener('canplaythrough', null, false)
+    this.audio.src = `sounds/${this.props.label.toLowerCase()}.wav`
   }
 
   handleKeydown = event => {
@@ -87,11 +93,6 @@ class Drum extends Component {
         <Labels>
           <Key>{activeKey}</Key>
           <Sound>{label}</Sound>
-          <audio
-            ref={c => (this.audio = c)}
-            type='audio/wav'
-            src={`sounds/${label.toLowerCase()}.wav`}
-          />
         </Labels>
       </Container>
     )
