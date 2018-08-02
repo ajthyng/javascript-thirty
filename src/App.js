@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar'
 import styled from 'styled-components'
 import Project from './components/Project'
 import DayOne from './components/DayOne/DayOne'
+import DayTwo from './components/DayTwo/DayTwo'
 
 const Container = styled.div`
   position: fixed;
@@ -21,7 +22,7 @@ const Content = styled.div`
 
 class App extends Component {
   state = {
-    day: <DayOne />
+    day: <DayTwo />
   }
 
   onClick = day => this.setState({ day: day || null })
@@ -31,7 +32,7 @@ class App extends Component {
       <Container>
         <Sidebar onClick={this.onClick}>
           <Project name='Day One' Day={DayOne} />
-          <Project name='Day Two' />
+          <Project name='Day Two' Day={DayTwo} />
           <Project name='Day Three' />
           <Project name='Day Four' />
           <Project name='Day Five' />
