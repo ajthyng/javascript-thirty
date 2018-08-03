@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Project from './components/Project'
 import DayOne from './components/DayOne/DayOne'
 import DayTwo from './components/DayTwo/DayTwo'
+import DayThree from './components/DayThree/DayThree'
 
 const Container = styled.div`
   position: fixed;
@@ -22,7 +23,7 @@ const Content = styled.div`
 
 class App extends Component {
   state = {
-    day: <DayTwo />
+    day: <DayThree />
   }
 
   onClick = day => this.setState({ day: day || null })
@@ -33,7 +34,7 @@ class App extends Component {
         <Sidebar onClick={this.onClick}>
           <Project name='Day One' Day={DayOne} />
           <Project name='Day Two' Day={DayTwo} />
-          <Project name='Day Three' />
+          <Project name='Day Three' Day={DayThree} />
           <Project name='Day Four' />
           <Project name='Day Five' />
           <Project name='Day Six' />
