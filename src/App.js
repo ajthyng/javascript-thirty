@@ -5,6 +5,7 @@ import Project from './components/Project'
 import DayOne from './components/DayOne/DayOne'
 import DayTwo from './components/DayTwo/DayTwo'
 import DayThree from './components/DayThree/DayThree'
+import DayFour from './components/DayFour/DayFour'
 
 const Container = styled.div`
   position: fixed;
@@ -22,8 +23,12 @@ const Content = styled.div`
 `
 
 class App extends Component {
-  state = {
-    day: <DayThree />
+  constructor (props) {
+    super(props)
+    const StartDay = DayFour
+    this.state = {
+      day: <StartDay />
+    }
   }
 
   onClick = day => this.setState({ day: day || null })
@@ -35,7 +40,7 @@ class App extends Component {
           <Project name='Day One' Day={DayOne} />
           <Project name='Day Two' Day={DayTwo} />
           <Project name='Day Three' Day={DayThree} />
-          <Project name='Day Four' />
+          <Project name='Day Four' Day={DayFour} />
           <Project name='Day Five' />
           <Project name='Day Six' />
         </Sidebar>
